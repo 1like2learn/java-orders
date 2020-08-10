@@ -1,9 +1,11 @@
 package com.lambdaschool.orders.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "agents")
+@Table(name = "AGENTS")
 public class Agent {
 
     //dim a long primary id
@@ -26,6 +28,10 @@ public class Agent {
 
     //dim a country they live in
     private String country;
+
+    //join the agents table to the customers table
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Customer> customers = new ArrayList<>();
 
     public Agent() {
     }

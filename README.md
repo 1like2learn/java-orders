@@ -56,15 +56,15 @@ The table layouts are as follows
   * PAYMENTID foreign key to PAYMENTS.
 
 * Customers has a foreign key to Agents (AGENTCODE) this means:
-  * Customers has a Many to One relationship to Agents and
+  * Customers has a Many to One relationship to Agents and/
   * Agents has a One to Many relationship to Customers
 
 * Orders has a foreign key to Customers (CUSTCODE)
-  * Orders has a Many to One relationship to Customers and
-  * Customers has a One to Many relationship to Orders
+  * Orders has a Many to One relationship to Customers and/
+  * Customers has a One to Many relationship to Orders/
 
 * Orders has a many to many relationship with payments
-  * multiple orders can use the same payment type and an order can have multiple payment types.
+  * multiple orders can use the same payment type and an order can have multiple payment types./
   * For example, you can use both gift card and credit card to pay for an order.
 
 ### MVP and Stretch Goal

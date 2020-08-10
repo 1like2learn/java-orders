@@ -1,9 +1,11 @@
 package com.lambdaschool.orders.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "payments")
+@Table(name = "PAYMENTS")
 public class Payment {
 
     //dim primary key payment id
@@ -14,6 +16,9 @@ public class Payment {
 
     //dim type
     private String type;
+
+    @ManyToMany(mappedBy = "payments")
+    private Set<Order> orders = new HashSet<>();
 
     //constructors
     public Payment() {
@@ -41,5 +46,14 @@ public class Payment {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    //orders
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

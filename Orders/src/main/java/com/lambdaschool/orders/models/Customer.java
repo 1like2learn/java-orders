@@ -1,9 +1,11 @@
 package com.lambdaschool.orders.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "CUSTOMERS")
 public class Customer {
 
     //dim primary key
@@ -41,6 +43,16 @@ public class Customer {
 
     //dim phone
     private double phone;
+
+    //connect the customers table to the agents table in a many to one relation
+    @ManyToOne
+    @JoinColumn(name = "agentcode", nullable = false)
+    private Agent agent;
+
+    //connect customers to agents table in a one to many relation
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
+
 
     //Constructors
     public Customer() {
