@@ -21,7 +21,7 @@ public class Customer {
     private String custcity;
 
     //dim working area
-    private String custworkingarea;
+    private String workingarea;
 
     //dim country
     private String custcountry;
@@ -42,7 +42,7 @@ public class Customer {
     private double outstandingamt;
 
     //dim phone
-    private double phone;
+    private String phone;
 
     //connect the customers table to the agents table in a many to one relation
     @ManyToOne
@@ -61,17 +61,17 @@ public class Customer {
     public Customer(
         String custname,
         String custcity,
-        String custworkingarea,
+        String workingarea,
         String custcountry,
         String grade,
         double openingamt,
         double receiveamt,
         double paymentamt,
         double outstandingamt,
-        double phone) {
+        String phone) {
         this.custname = custname;
         this.custcity = custcity;
-        this.custworkingarea = custworkingarea;
+        this.workingarea = workingarea;
         this.custcountry = custcountry;
         this.grade = grade;
         this.openingamt = openingamt;
@@ -111,12 +111,12 @@ public class Customer {
     }
 
     //customer working area
-    public String getCustworkingarea() {
-        return custworkingarea;
+    public String getWorkingarea() {
+        return workingarea;
     }
 
-    public void setCustworkingarea(String custworkingarea) {
-        this.custworkingarea = custworkingarea;
+    public void setWorkingarea(String workingarea) {
+        this.workingarea = workingarea;
     }
 
     //customer country
@@ -174,11 +174,11 @@ public class Customer {
     }
 
     //phone
-    public double getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(double phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 }
