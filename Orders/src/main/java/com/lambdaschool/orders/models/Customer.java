@@ -68,7 +68,7 @@ public class Customer {
         double receiveamt,
         double paymentamt,
         double outstandingamt,
-        String phone) {
+        String phone, Agent agent) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -79,6 +79,7 @@ public class Customer {
         this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
         this.phone = phone;
+        this.agent = agent;
     }
 
     /*=== getters and setters ===*/
