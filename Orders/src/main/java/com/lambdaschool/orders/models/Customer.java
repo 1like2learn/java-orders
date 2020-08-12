@@ -17,6 +17,7 @@ public class Customer {
     private long custcode;
 
     //dim name
+    @Column(nullable = false, unique = true)
     private String custname;
 
     //dim city
@@ -47,14 +48,14 @@ public class Customer {
     private String phone;
 
     //connect the customers table to the agents table in a many to one relation
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "agentcode", nullable = false)
     @JsonIgnoreProperties("customers")
     private Agent agent;
 
     //connect customers to orders table in a one to many relation
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("customer")
+    @JsonIgnoreProperties(value = "customers")
     private List<Order> orders = new ArrayList<>();
 
 
@@ -62,34 +63,20 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(
-        String custname,
-        String custcity,
-        String workingarea,
-        String custcountry,
-        String grade,
-        double openingamt,
-        double receiveamt,
-        double paymentamt,
-        double outstandingamt,
-        String phone,
-        Agent agent) {
-        this.custname = custname;
+    public Customer(String custcity, String custcountry, String custname, String grade, double openingamt, double outstandingamt, double paymentamt, String phone, double receiveamt, String workingarea, Agent agent) {
         this.custcity = custcity;
-        this.workingarea = workingarea;
         this.custcountry = custcountry;
+        this.custname = custname;
         this.grade = grade;
         this.openingamt = openingamt;
-        this.receiveamt = receiveamt;
-        this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
+        this.paymentamt = paymentamt;
         this.phone = phone;
+        this.receiveamt = receiveamt;
+        this.workingarea = workingarea;
         this.agent = agent;
     }
 
-    /*=== getters and setters ===*/
-
-    //customer code
     public long getCustcode() {
         return custcode;
     }
@@ -98,7 +85,6 @@ public class Customer {
         this.custcode = custcode;
     }
 
-    //customer name
     public String getCustname() {
         return custname;
     }
@@ -107,7 +93,6 @@ public class Customer {
         this.custname = custname;
     }
 
-    //customer city
     public String getCustcity() {
         return custcity;
     }
@@ -116,7 +101,6 @@ public class Customer {
         this.custcity = custcity;
     }
 
-    //customer working area
     public String getWorkingarea() {
         return workingarea;
     }
@@ -125,7 +109,6 @@ public class Customer {
         this.workingarea = workingarea;
     }
 
-    //customer country
     public String getCustcountry() {
         return custcountry;
     }
@@ -134,7 +117,6 @@ public class Customer {
         this.custcountry = custcountry;
     }
 
-    //grade
     public String getGrade() {
         return grade;
     }
@@ -143,7 +125,6 @@ public class Customer {
         this.grade = grade;
     }
 
-    //opening amount
     public double getOpeningamt() {
         return openingamt;
     }
@@ -152,7 +133,6 @@ public class Customer {
         this.openingamt = openingamt;
     }
 
-    //recieving amount
     public double getReceiveamt() {
         return receiveamt;
     }
@@ -161,7 +141,6 @@ public class Customer {
         this.receiveamt = receiveamt;
     }
 
-    //payment amount
     public double getPaymentamt() {
         return paymentamt;
     }
@@ -170,7 +149,6 @@ public class Customer {
         this.paymentamt = paymentamt;
     }
 
-    //outstanding amount
     public double getOutstandingamt() {
         return outstandingamt;
     }
@@ -179,7 +157,6 @@ public class Customer {
         this.outstandingamt = outstandingamt;
     }
 
-    //phone
     public String getPhone() {
         return phone;
     }
@@ -188,7 +165,6 @@ public class Customer {
         this.phone = phone;
     }
 
-    //agent
     public Agent getAgent() {
         return agent;
     }
@@ -197,12 +173,11 @@ public class Customer {
         this.agent = agent;
     }
 
-    //orders
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    private List<Order> getOrders() {
-        return orders;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

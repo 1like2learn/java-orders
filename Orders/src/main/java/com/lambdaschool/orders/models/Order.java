@@ -50,7 +50,6 @@ public class Order {
         this.customer = customer;
         this.advanceamount = advanceamount;
         this.orderdescription = orderdescription;
-        this.payments = getPayments();
     }
 
     /*=== getters and setters ===*/
