@@ -5,4 +5,6 @@ import com.lambdaschool.orders.models.Agent;
 public interface AgentServices {
 
     Agent save(Agent agent);
+
+    public Agent findAgentById(Long agentid);
 }

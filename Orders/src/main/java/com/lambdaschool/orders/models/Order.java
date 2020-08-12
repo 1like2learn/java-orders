@@ -1,11 +1,13 @@
 package com.lambdaschool.orders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "orders")
 public class Order {
 
     //dim order number as the primary key
@@ -24,15 +26,17 @@ public class Order {
     private String orderdescription;
 
     @ManyToOne
-    @JoinColumn(name = "custcode",
-        nullable = false)
+    @JoinColumn(name = "custcode", nullable = false)
+    @JsonIgnoreProperties("orders")
     private Customer customer;
 
     @ManyToMany()
     @JoinTable(name = "orderspayments",
     joinColumns = @JoinColumn(name = "ordnum"),
     inverseJoinColumns = @JoinColumn(name = "paymentid"))
+    @JsonIgnoreProperties("orders")
     Set<Payment> payments = new HashSet<>();
+
     //constructors
     public Order() {
     }
@@ -46,6 +50,7 @@ public class Order {
         this.customer = customer;
         this.advanceamount = advanceamount;
         this.orderdescription = orderdescription;
+        this.payments = getPayments();
     }
 
     /*=== getters and setters ===*/
@@ -94,7 +99,7 @@ public class Order {
         return payments;
     }
 
-    public void addPayment(Set<Payment> payments) {
+    public void setPayments(Set<Payment> payments) {
         this.payments = payments;
     }
 

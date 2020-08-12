@@ -1,11 +1,13 @@
 package com.lambdaschool.orders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "CUSTOMERS")
+@Table(name = "customers")
 public class Customer {
 
     //dim primary key
@@ -47,10 +49,12 @@ public class Customer {
     //connect the customers table to the agents table in a many to one relation
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
+    @JsonIgnoreProperties("customers")
     private Agent agent;
 
-    //connect customers to agents table in a one to many relation
+    //connect customers to orders table in a one to many relation
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("customer")
     private List<Order> orders = new ArrayList<>();
 
 
@@ -68,7 +72,8 @@ public class Customer {
         double receiveamt,
         double paymentamt,
         double outstandingamt,
-        String phone, Agent agent) {
+        String phone,
+        Agent agent) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -181,5 +186,23 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    //agent
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    //orders
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    private List<Order> getOrders() {
+        return orders;
     }
 }
